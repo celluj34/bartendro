@@ -9,7 +9,7 @@ namespace Bartendro.Application.Extensions
     {
         public static IServiceCollection RegisterApplication(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IWeatherForecastOrchestrator, WeatherForecastOrchestrator>();
+            serviceCollection.AddScoped<IWeatherForecastOrchestrator, WeatherForecastOrchestrator>();
             serviceCollection.AddSingleton(new Random());
 
             return serviceCollection.RegisterDatabase();

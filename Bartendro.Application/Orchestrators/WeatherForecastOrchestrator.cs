@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bartendro.Application.Models.Weather;
 using Bartendro.Database.Entities;
+using Bartendro.Database.Services;
 
 namespace Bartendro.Application.Orchestrators
 {
@@ -29,14 +30,18 @@ namespace Bartendro.Application.Orchestrators
         };
 
         private readonly Random _random;
+        private readonly IReader _reader;
 
-        public WeatherForecastOrchestrator(Random random)
+        public WeatherForecastOrchestrator(Random random, IReader reader)
         {
             _random = random;
+            _reader = reader;
         }
 
         public async Task<IEnumerable<WeatherForecastModel>> GetForecastAsync(DateTime startDate)
         {
+            var t = _reader.Query<Blog>();
+
             var weatherForecasts = Enumerable.Range(1, 5)
                                              .Select(index => new WeatherForecast
                                              {
