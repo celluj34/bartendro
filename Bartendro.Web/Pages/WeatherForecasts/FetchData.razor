@@ -1,0 +1,59 @@
+﻿@page "/weather-forecasts/fetch-data"
+@using Bartendro.Application.Models.Weather
+@using Bartendro.Application.Orchestrators
+@inject IWeatherForecastOrchestrator WeatherForecastOrchestrator
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if(_loading)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <button @onclick="Refresh">Refresh Data</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date2</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var forecast in _forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC°</td>
+                    <td>@forecast.TemperatureF.ToString("F2")°</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    bool _loading = true;
+    IEnumerable<WeatherForecastModel> _forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _forecasts = await WeatherForecastOrchestrator.GetForecastAsync(DateTime.Now);
+
+        _loading = false;
+    }
+
+    async Task Refresh()
+    {
+        _forecasts = await WeatherForecastOrchestrator.GetForecastAsync(DateTime.Now);
+    }
+
+}
