@@ -1,13 +1,37 @@
-﻿using Bartendro.Database.Services;
+﻿using System.Linq;
+using Bartendro.Database.Services;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bartendro.Database.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterDatabase(this IServiceCollection serviceCollection)
+        public static void RegisterDatabase(this IServiceCollection serviceCollection)
         {
-            return serviceCollection.AddTransient<IReader, Reader>().AddScoped<IDatabaseContext, DatabaseContext>();
+            serviceCollection.AddTransient<IReader, Reader>();
+            serviceCollection.AddTransient(typeof(Command<>));
+            serviceCollection.AddTransient<ICommandFactory, CommandFactory>();
+            serviceCollection.AddScoped<IDatabaseContext, DatabaseContext>();
+            serviceCollection.AddValidators();
+        }
+
+        private static void AddValidators(this IServiceCollection serviceCollection)
+        {
+            const string validatorsNamespace = "Bartendro.Database.Validators";
+            var abstractValidatorType = typeof(AbstractValidator<>);
+
+            typeof(ServiceCollectionExtensions).Assembly.GetTypes()
+                                               .Where(type => type.Namespace == validatorsNamespace)
+                                               .Select(type => new
+                                               {
+                                                   BaseClass = type.BaseType,
+                                                   Implementation = type
+                                               })
+                                               .Where(type => type.BaseClass.IsGenericType)
+                                               .Where(type => type.BaseClass.GetGenericTypeDefinition() == abstractValidatorType)
+                                               .ToList()
+                                               .ForEach(reg => serviceCollection.AddSingleton(reg.BaseClass, reg.Implementation));
         }
     }
 }

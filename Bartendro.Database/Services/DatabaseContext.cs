@@ -1,4 +1,5 @@
-﻿using Bartendro.Database.Entities;
+﻿using System.Threading.Tasks;
+using Bartendro.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Database.Services
@@ -6,34 +7,27 @@ namespace Bartendro.Database.Services
     internal interface IDatabaseContext
     {
         DbSet<T> Set<T>() where T : class;
+        Task SaveChangesAsync();
     }
 
     internal class DatabaseContext : DbContext, IDatabaseContext
     {
-        public DbSet<Blog> Blogs {get;set;}
+        public DbSet<Recipe> Recipes {get;set;}
+        public DbSet<Ingredient> Ingredients {get;set;}
 
         DbSet<T> IDatabaseContext.Set<T>()
         {
             return Set<T>();
         }
 
+        async Task IDatabaseContext.SaveChangesAsync()
+        {
+            await SaveChangesAsync();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=Bartendro.db");
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Map table names
-            modelBuilder.Entity<Blog>().ToTable("Blogs", "test");
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.HasKey(e => e.BlogId);
-                entity.HasIndex(e => e.Title).IsUnique();
-                entity.Property(e => e.DateTimeAdd).HasDefaultValueSql("CURRENT_TIMESTAMP");
-            });
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }
