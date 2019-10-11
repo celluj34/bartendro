@@ -30,10 +30,7 @@ else
             @foreach(var forecast in _forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC°</td>
-                    <td>@forecast.TemperatureF.ToString("F2")°</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Title</td>
                 </tr>
             }
         </tbody>
@@ -42,7 +39,7 @@ else
 
 @code {
     bool _loading = true;
-    IEnumerable<WeatherForecastModel> _forecasts;
+    IEnumerable<RecipeModel> _forecasts;
 
     protected override async Task OnInitializedAsync()
     {
