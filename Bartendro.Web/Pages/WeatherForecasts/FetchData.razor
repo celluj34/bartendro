@@ -1,6 +1,7 @@
 ﻿@page "/weather-forecasts/fetch-data"
 @using Bartendro.Application.Models.Weather
 @using Bartendro.Application.Orchestrators
+@using Bartendro.Web.Shared
 @inject IWeatherForecastOrchestrator WeatherForecastOrchestrator
 
 <h1>Weather forecast</h1>
@@ -9,9 +10,7 @@
 
 @if(_loading)
 {
-    <p>
-        <em>Loading...</em>
-    </p>
+    <Loading />
 }
 else
 {
@@ -31,6 +30,9 @@ else
             {
                 <tr>
                     <td>@forecast.Title</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             }
         </tbody>
@@ -50,7 +52,11 @@ else
 
     async Task Refresh()
     {
+        _loading = true;
+
         _forecasts = await WeatherForecastOrchestrator.GetForecastAsync(DateTime.Now);
+
+        _loading = false;
     }
 
 }
