@@ -165,18 +165,18 @@ namespace Bartendro.Database.Services
             return this;
         }
 
-        internal ICommand<T> Update(Guid id)
+        internal ICommand<T> Update(Guid id, byte[] version)
         {
             _getAction = async () =>
             {
                 var entity = await _databaseContext.Set<T>().FindAsync(id);
 
-                //if(entity.Version == version)
+                if(entity.Version != version)
                 {
-                    return entity;
+                    throw new DbUpdateConcurrencyException();
                 }
 
-                //throw new DbUpdateConcurrencyException();
+                return entity;
             };
 
             _validate = true;
@@ -186,18 +186,18 @@ namespace Bartendro.Database.Services
             return this;
         }
 
-        internal ICommand<T> Delete(Guid id)
+        internal ICommand<T> Delete(Guid id, byte[] version)
         {
             _getAction = async () =>
             {
                 var entity = await _databaseContext.Set<T>().FindAsync(id);
 
-                //if(entity.Version == version)
+                if(entity.Version != version)
                 {
-                    return entity;
+                    throw new DbUpdateConcurrencyException();
                 }
 
-                //throw new DbUpdateConcurrencyException();
+                return entity;
             };
 
             _validate = false;
