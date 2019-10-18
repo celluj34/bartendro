@@ -1,20 +1,14 @@
 ﻿using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bartendro.Application.Extensions
+namespace Bartendro.Web.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterApplication(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.RegisterOrchestratorsAndServices();
-        }
-
-        private static void RegisterOrchestratorsAndServices(this IServiceCollection serviceCollection)
+        public static void RegisterServices(this IServiceCollection serviceCollection)
         {
             var namespaces = new[]
             {
-                "Bartendro.Application.Orchestrators",
                 "Bartendro.Application.Services"
             };
 

@@ -1,6 +1,6 @@
-using Bartendro.Application.Extensions;
 using Bartendro.Common.Extensions;
 using Bartendro.Database.Extensions;
+using Bartendro.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +22,7 @@ namespace Bartendro.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.RegisterApplication();
+            services.RegisterServices();
             services.RegisterDatabase();
             services.RegisterCommon();
         }

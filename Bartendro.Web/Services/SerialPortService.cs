@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO.Ports;
 
-namespace Bartendro.Application.Services
+namespace Bartendro.Web.Services
 {
     internal interface ISerialPortService
     {

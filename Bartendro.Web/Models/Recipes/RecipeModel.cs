@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bartendro.Application.Models.Recipes
+namespace Bartendro.Web.Models.Recipes
 {
     public class RecipeModel
     {
