@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Bartendro.Database.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bartendro.Application.Extensions
@@ -8,11 +7,10 @@ namespace Bartendro.Application.Extensions
     {
         public static void RegisterApplication(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddOrchestratorsAndServices();
-            serviceCollection.RegisterDatabase();
+            serviceCollection.RegisterOrchestratorsAndServices();
         }
 
-        private static void AddOrchestratorsAndServices(this IServiceCollection serviceCollection)
+        private static void RegisterOrchestratorsAndServices(this IServiceCollection serviceCollection)
         {
             var namespaces = new[]
             {

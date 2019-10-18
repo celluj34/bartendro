@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Arsenal.Helpers.Common.Extensions;
+using Bartendro.Common.Extensions;
 using Bartendro.Common.Services;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Models;

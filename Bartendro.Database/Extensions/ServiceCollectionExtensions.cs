@@ -9,14 +9,19 @@ namespace Bartendro.Database.Extensions
     {
         public static void RegisterDatabase(this IServiceCollection serviceCollection)
         {
+            serviceCollection.RegisterServices();
+            serviceCollection.RegisterValidators();
+        }
+
+        private static void RegisterServices(this IServiceCollection serviceCollection)
+        {
             serviceCollection.AddTransient<IReader, Reader>();
             serviceCollection.AddTransient(typeof(Command<>));
             serviceCollection.AddTransient<ICommandFactory, CommandFactory>();
             serviceCollection.AddScoped<IDatabaseContext, DatabaseContext>();
-            serviceCollection.AddValidators();
         }
 
-        private static void AddValidators(this IServiceCollection serviceCollection)
+        private static void RegisterValidators(this IServiceCollection serviceCollection)
         {
             const string validatorsNamespace = "Bartendro.Database.Validators";
             var abstractValidatorType = typeof(AbstractValidator<>);
