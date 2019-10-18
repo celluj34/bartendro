@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Arsenal.Helpers.Common.Extensions;
+using Bartendro.Common.Services;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
 
 namespace Bartendro.Database.Services
 {
@@ -22,15 +22,17 @@ namespace Bartendro.Database.Services
         private const string DocumentConflictError = "This document has already been updated. Refresh and try again.";
         private readonly List<Func<T, Task>> _actions;
         private readonly IDatabaseContext _databaseContext;
+        private readonly IDateTimeService _dateTimeService;
         private readonly AbstractValidator<T> _validator;
         private Func<Task<T>> _getAction;
         private Action<T> _saveAction;
         private bool _validate;
 
-        public Command(IDatabaseContext databaseContext, AbstractValidator<T> validator)
+        public Command(IDatabaseContext databaseContext, AbstractValidator<T> validator, IDateTimeService dateTimeService)
         {
             _databaseContext = databaseContext;
             _validator = validator;
+            _dateTimeService = dateTimeService;
             _actions = new List<Func<T, Task>>();
         }
 
@@ -160,7 +162,12 @@ namespace Bartendro.Database.Services
             _getAction = () => Task.FromResult(new T());
 
             _validate = true;
-            _saveAction = entity => _databaseContext.Set<T>().Add(entity);
+            _saveAction = entity =>
+            {
+                entity.DateCreated = _dateTimeService.Now();
+
+                _databaseContext.Set<T>().Add(entity);
+            };
 
             return this;
         }
@@ -201,7 +208,12 @@ namespace Bartendro.Database.Services
             };
 
             _validate = false;
-            _saveAction = entity => _databaseContext.Set<T>().Remove(entity);
+            _saveAction = entity =>
+            {
+                entity.DateModified = _dateTimeService.Now();
+
+                _databaseContext.Set<T>().Remove(entity);
+            };
 
             return this;
         }
