@@ -97,6 +97,12 @@ namespace Bartendro.Database.Services
 
                 return (entity, new DatabaseResult());
             }
+            catch(DbUpdateConcurrencyException)
+            {
+                var result = new DatabaseResult().AddError(DocumentConflictError);
+
+                return (default, result);
+            }
             catch(Exception ex)
             {
                 var result = new DatabaseResult().AddError(ex);
@@ -140,12 +146,13 @@ namespace Bartendro.Database.Services
             {
                 _saveAction(entity);
 
-                _databaseContext.SaveChangesAsync();
+                await _databaseContext.SaveChangesAsync();
 
-                return new DatabaseResult
+                return new DatabaseResult(new EntityModel
                 {
-                    Entity = entity.Id.ToString()
-                };
+                    Id = entity.Id,
+                    Version = entity.Version
+                });
             }
             catch(DbUpdateConcurrencyException)
             {
