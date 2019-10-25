@@ -1,15 +1,14 @@
 ﻿@page "/recipes/{id}"
-@inherits UpdateRecipe
 
 <h1>Update Recipe</h1>
 
-<EditForm Model="@Recipe" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <p>
         <label for="identifier">Identifier: </label>
-        <InputText id="identifier" @bind-Value="Recipe.Title" />
+        <InputText id="identifier" @bind-Value="_recipe.Title" />
     </p>
 
     @*<p>

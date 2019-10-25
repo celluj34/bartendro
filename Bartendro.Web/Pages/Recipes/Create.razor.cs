@@ -1,21 +1,25 @@
 ﻿using System.Threading.Tasks;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Services;
-using Bartendro.Web.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 
 namespace Bartendro.Web.Pages.Recipes
 {
-    public class CreateRecipe : ComponentBase
+    public partial class Create
     {
-        protected readonly RecipeCreateModel Recipe = new RecipeCreateModel();
+        private readonly RecipeCreateModel _recipe = new RecipeCreateModel();
 
         [Inject]
         private ICommandFactory CommandFactory {get;set;}
 
-        protected async Task HandleValidSubmit()
+        private async Task HandleValidSubmit()
         {
-            var result = await CommandFactory.Create<Recipe>().Run(x => x.Title = Recipe.Title).SaveChanges();
+            var result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChanges();
+        }
+
+        private class RecipeCreateModel
+        {
+            public string Title {get;set;}
         }
     }
 }

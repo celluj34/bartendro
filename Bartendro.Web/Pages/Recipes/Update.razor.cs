@@ -3,15 +3,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Services;
-using Bartendro.Web.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Web.Pages.Recipes
 {
-    public class UpdateRecipe : ComponentBase
+    public partial class Update
     {
-        protected RecipeUpdateModel Recipe;
+        private RecipeUpdateModel _recipe;
 
         [Inject]
         private IReader Reader {get;set;}
@@ -24,20 +23,27 @@ namespace Bartendro.Web.Pages.Recipes
 
         protected override async Task OnParametersSetAsync()
         {
-            Recipe = await Reader.Query<Recipe>()
-                                 .Where(x => x.Id == Id)
-                                 .Select(x => new RecipeUpdateModel
-                                 {
-                                     Id = x.Id,
-                                     Version = x.Version,
-                                     Title = x.Title
-                                 })
-                                 .SingleOrDefaultAsync();
+            _recipe = await Reader.Query<Recipe>()
+                                  .Where(x => x.Id == Id)
+                                  .Select(x => new RecipeUpdateModel
+                                  {
+                                      Id = x.Id,
+                                      Version = x.Version,
+                                      Title = x.Title
+                                  })
+                                  .SingleOrDefaultAsync();
         }
 
         protected async Task HandleValidSubmit()
         {
-            var result = await CommandFactory.Update<Recipe>(Recipe.Id, Recipe.Version).Run(x => x.Title = Recipe.Title).SaveChanges();
+            var result = await CommandFactory.Update<Recipe>(_recipe.Id, _recipe.Version).Run(x => x.Title = _recipe.Title).SaveChanges();
+        }
+
+        private class RecipeUpdateModel
+        {
+            public Guid Id {get;set;}
+            public byte[] Version {get;set;}
+            public string Title {get;set;}
         }
     }
 }

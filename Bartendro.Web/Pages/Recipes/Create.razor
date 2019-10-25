@@ -1,17 +1,16 @@
 ﻿@page "/recipes/create"
-@inherits CreateRecipe
 
 <h1>Recipes</h1>
 
 <p>This component demonstrates sending data to a service.</p>
 
-<EditForm Model="@Recipe" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <p>
         <label for="identifier">Identifier: </label>
-        <InputText id="identifier" @bind-Value="Recipe.Title" />
+        <InputText id="identifier" @bind-Value="_recipe.Title" />
     </p>
     @*<p>
             <label for="description">Description (optional): </label>
