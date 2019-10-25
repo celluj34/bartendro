@@ -1,11 +1,10 @@
 ﻿@page "/recipes"
-@inherits ListRecipes
 
 <h1>Recipes</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if(Loading)
+@if(_loading)
 {
     <Bartendro.Web.Shared.Loading />
 }
@@ -21,7 +20,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach(var port in Recipes)
+            @foreach(var port in _recipes)
             {
                 <tr>
                     <td>@port.Id</td>

@@ -1,36 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Services;
-using Bartendro.Web.Models.Recipes;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Web.Pages.Recipes
 {
-    public class ListRecipes : ComponentBase
+    public partial class List
     {
-        protected bool Loading = true;
-        protected IEnumerable<RecipeListModel> Recipes;
+        private bool _loading = true;
+        private IEnumerable<RecipeListModel> _recipes;
 
         [Inject]
         private IReader Reader {get;set;}
 
         protected override async Task OnInitializedAsync()
         {
-            Recipes = await GetAllAsync();
+            _recipes = await GetAllAsync();
 
-            Loading = false;
+            _loading = false;
         }
 
-        protected async Task Refresh()
+        private async Task Refresh()
         {
-            Loading = true;
+            _loading = true;
 
-            Recipes = await GetAllAsync();
+            _recipes = await GetAllAsync();
 
-            Loading = false;
+            _loading = false;
         }
 
         private async Task<List<RecipeListModel>> GetAllAsync()
@@ -42,6 +42,12 @@ namespace Bartendro.Web.Pages.Recipes
                                    Title = x.Title
                                })
                                .ToListAsync();
+        }
+
+        private class RecipeListModel
+        {
+            public Guid Id {get;set;}
+            public string Title {get;set;}
         }
     }
 }
