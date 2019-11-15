@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazor.Extensions.Storage" Version="1.0.0" />
     <PackageReference Include="System.IO.Ports" Version="4.6.0" />
   </ItemGroup>
 

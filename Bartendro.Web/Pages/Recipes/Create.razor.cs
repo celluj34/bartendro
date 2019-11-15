@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Services;
+using Blazor.Extensions.Storage;
 using Microsoft.AspNetCore.Components;
 
 namespace Bartendro.Web.Pages.Recipes
@@ -11,6 +12,9 @@ namespace Bartendro.Web.Pages.Recipes
 
         [Inject]
         private ICommandFactory CommandFactory {get;set;}
+
+        [Inject]
+        private LocalStorage LocalStorage {get;set;}
 
         private async Task HandleValidSubmit()
         {
