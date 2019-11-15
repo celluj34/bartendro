@@ -5,7 +5,7 @@ using Bartendro.Common.Extensions;
 using Bartendro.Common.Services;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Models;
-using FluentValidation;
+using Bartendro.Database.Validators;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Database.Services
