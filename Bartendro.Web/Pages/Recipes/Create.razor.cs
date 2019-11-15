@@ -8,7 +8,12 @@ namespace Bartendro.Web.Pages.Recipes
 {
     public partial class Create
     {
-        private readonly RecipeCreateModel _recipe = new RecipeCreateModel();
+        private readonly Recipe _recipe;
+
+        public Create()
+        {
+            _recipe = new Recipe();
+        }
 
         [Inject]
         private ICommandFactory CommandFactory {get;set;}
@@ -19,11 +24,6 @@ namespace Bartendro.Web.Pages.Recipes
         private async Task HandleValidSubmit()
         {
             var result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChanges();
-        }
-
-        private class RecipeCreateModel
-        {
-            public string Title {get;set;}
         }
     }
 }

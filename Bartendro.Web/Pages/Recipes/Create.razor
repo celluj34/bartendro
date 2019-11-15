@@ -4,14 +4,15 @@
 
 <p>This component demonstrates sending data to a service.</p>
 
-<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit"> 
+    <PeterLeslieMorris.Blazor.Validation.Validate />
 
     <p>
-        <label for="identifier">Identifier: </label>
-        <InputText id="identifier" @bind-Value="_recipe.Title" />
+        <label for="Title">Title: </label>
+        <InputText id="Title" @bind-Value="_recipe.Title" class="form-control" />
+        <ValidationMessage For="@(() => _recipe.Title)" />
     </p>
+
     @*<p>
             <label for="description">Description (optional): </label>
             <InputTextArea id="description" @bind-Value="_recipe.Description" />
