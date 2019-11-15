@@ -32,9 +32,9 @@ namespace Bartendro.Web
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-                       .ConfigureWebHostDefaults(webBuilder =>
+                       .ConfigureWebHostDefaults(webHostBuilder =>
                        {
-                           webBuilder.UseStartup<Startup>();
+                           webHostBuilder.UseStartup<Startup>();
                        });
         }
     }

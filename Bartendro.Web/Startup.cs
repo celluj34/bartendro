@@ -3,7 +3,6 @@ using Bartendro.Database.Extensions;
 using Bartendro.Web.Extensions;
 using Blazor.Extensions.Storage;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PeterLeslieMorris.Blazor.Validation;
@@ -24,7 +23,7 @@ namespace Bartendro.Web
             services.RegisterCommon();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if(env.IsDevelopment())
             {
