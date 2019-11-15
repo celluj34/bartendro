@@ -1,4 +1,5 @@
 ﻿using Bartendro.Database.Entities;
+using FluentValidation;
 
 namespace Bartendro.Database.Validators
 {

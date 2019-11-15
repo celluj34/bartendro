@@ -18,7 +18,7 @@ namespace Bartendro.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddStorage();
-            services.AddFormValidation(config => config.AddFluentValidation(typeof(ServiceCollectionExtensions).Assembly));
+            services.AddFormValidation(config => config.AddDataAnnotationsValidation().AddFluentValidation(typeof(ServiceCollectionExtensions).Assembly));
             services.RegisterServices();
             services.RegisterDatabase();
             services.RegisterCommon();

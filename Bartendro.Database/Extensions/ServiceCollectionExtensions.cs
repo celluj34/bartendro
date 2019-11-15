@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Bartendro.Database.Services;
-using Bartendro.Database.Validators;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bartendro.Database.Extensions
