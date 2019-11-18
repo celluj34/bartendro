@@ -20,7 +20,7 @@ namespace Bartendro.Web.Pages.Recipes
         protected override async Task OnInitializedAsync()
         {
             _recipes = await GetAllAsync();
-
+            
             _loading = false;
         }
 
@@ -29,6 +29,8 @@ namespace Bartendro.Web.Pages.Recipes
             _loading = true;
 
             _recipes = await GetAllAsync();
+
+            await Task.Delay(1000);
 
             _loading = false;
         }
