@@ -1,5 +1,4 @@
 ﻿@page "/dispensers"
-@inherits ListDispensers
 
 <h1>Dispensers</h1>
 
@@ -11,21 +10,20 @@
 }
 else
 {
-    <button @onclick="Refresh">Refresh Data</button>
+<button @onclick="Refresh">Refresh Data</button>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Port</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Port</th>
+        </tr>
+    </thead>
+    <tbody>
             @foreach(var port in Ports)
-            {
-                <tr>
-                    <td>@port</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        {
+            <tr>
+                <td>@port</td>
+            </tr>
+        }
+    </tbody>
+</table>

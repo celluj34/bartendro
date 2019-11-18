@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bartendro.Web.Pages.Dispensers
 {
-    public class ListDispensers : ComponentBase
+    public partial class List
     {
         protected bool Loading = true;
         protected IEnumerable<string> Ports;
