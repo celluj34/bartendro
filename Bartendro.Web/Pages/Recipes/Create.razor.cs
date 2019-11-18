@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Bartendro.Database.Entities;
+using Bartendro.Database.Models;
 using Bartendro.Database.Services;
 using Blazor.Extensions.Storage;
 using Microsoft.AspNetCore.Components;
@@ -9,6 +10,7 @@ namespace Bartendro.Web.Pages.Recipes
     public partial class Create
     {
         private readonly Recipe _recipe;
+        private DatabaseResult _result;
 
         public Create()
         {
@@ -23,7 +25,7 @@ namespace Bartendro.Web.Pages.Recipes
 
         private async Task HandleValidSubmit()
         {
-            var result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChanges();
+            _result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChanges();
         }
     }
 }
