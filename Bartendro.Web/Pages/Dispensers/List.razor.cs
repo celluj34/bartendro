@@ -6,26 +6,26 @@ namespace Bartendro.Web.Pages.Dispensers
 {
     public partial class List
     {
-        protected bool Loading = true;
-        protected IEnumerable<string> Ports;
+        private bool _loading = true;
+        private IEnumerable<string> _ports;
 
         [Inject]
         private ISerialPortService DispensersOrchestrator {get;set;}
 
         protected override void OnInitialized()
         {
-            Ports = DispensersOrchestrator.GetPorts();
+            _ports = DispensersOrchestrator.GetPorts();
 
-            Loading = false;
+            _loading = false;
         }
 
         protected void Refresh()
         {
-            Loading = true;
+            _loading = true;
 
-            Ports = DispensersOrchestrator.GetPorts();
+            _ports = DispensersOrchestrator.GetPorts();
 
-            Loading = false;
+            _loading = false;
         }
     }
 }

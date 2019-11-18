@@ -4,12 +4,8 @@
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if(Loading)
-{
-    <Bartendro.Web.Shared.Loading />
-}
-else
-{
+<LoadingScreen Loading="@_loading" />
+
 <button @onclick="Refresh">Refresh Data</button>
 
 <table class="table">
@@ -19,7 +15,7 @@ else
         </tr>
     </thead>
     <tbody>
-            @foreach(var port in Ports)
+        @foreach(var port in _ports)
         {
             <tr>
                 <td>@port</td>
