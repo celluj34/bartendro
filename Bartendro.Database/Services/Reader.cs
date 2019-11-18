@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using Bartendro.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Database.Services
 {
     public interface IReader
     {
-        IQueryable<T> Query<T>() where T : class;
+        IQueryable<T> Query<T>() where T : Entity;
     }
 
     internal class Reader : IReader
@@ -17,7 +18,7 @@ namespace Bartendro.Database.Services
             _context = context;
         }
 
-        public IQueryable<T> Query<T>() where T : class
+        public IQueryable<T> Query<T>() where T : Entity
         {
             return _context.Set<T>().AsNoTracking();
         }

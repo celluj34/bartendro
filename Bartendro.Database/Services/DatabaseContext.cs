@@ -13,7 +13,7 @@ namespace Bartendro.Database.Services
 
     internal interface IDatabaseContext
     {
-        DbSet<T> Set<T>() where T : class;
+        DbSet<T> Set<T>() where T : Entity;
         Task SaveChangesAsync();
     }
 
