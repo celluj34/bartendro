@@ -4,47 +4,12 @@
 
 <p>This component demonstrates sending data to a service.</p>
 
-<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit"> 
-    <PeterLeslieMorris.Blazor.Validation.Validate />
+<EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
+    <Validate />
 
     <p>
         <label for="Title">Title: </label>
         <InputText id="Title" @bind-Value="_recipe.Title" class="form-control" />
         <ValidationMessage For="@(() => _recipe.Title)" />
     </p>
-
-    @*<p>
-            <label for="description">Description (optional): </label>
-            <InputTextArea id="description" @bind-Value="_recipe.Description" />
-        </p>
-        <p>
-            <label for="classification">Primary Classification: </label>
-            <InputSelect id="classification" @bind-Value="_recipe.Classification">
-                <option value="">Select classification ...</option>
-                <option value="Exploration">Exploration</option>
-                <option value="Diplomacy">Diplomacy</option>
-                <option value="Defense">Defense</option>
-            </InputSelect>
-        </p>
-        <p>
-            <label for="accommodation">Maximum Accommodation: </label>
-            <InputNumber id="accommodation"
-                         @bind-Value="_recipe.MaximumAccommodation" />
-        </p>
-        <p>
-            <label for="valid">Engineering Approval: </label>
-            <InputCheckbox id="valid" @bind-Value="_recipe.IsValidatedDesign" />
-        </p>
-        <p>
-            <label for="productionDate">Production Date: </label>
-            <InputDate id="productionDate" @bind-Value="_recipe.ProductionDate" />
-        </p>
-
-        <button type="submit">Submit</button>
-
-        <p>
-            <a href="http://www.startrek.com/">Star Trek</a>,
-            &copy;1966-2019 CBS Studios, Inc. and
-            <a href="https://www.paramount.com">Paramount Pictures</a>
-        </p>*@
 </EditForm>

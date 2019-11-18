@@ -3,45 +3,11 @@
 <h1>Update Recipe</h1>
 
 <EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+    <Validate />
 
     <p>
-        <label for="identifier">Identifier: </label>
-        <InputText id="identifier" @bind-Value="_recipe.Title" />
+        <label for="Title">Title: </label>
+        <InputText id="Title" @bind-Value="_recipe.Title" class="form-control" />
+        <ValidationMessage For="@(() => _recipe.Title)" />
     </p>
-
-    @*<p>
-            <label for="description">Description (optional): </label>
-            <InputTextArea id="description" @bind-Value="_recipe.Description" />
-        </p>
-
-        <p>
-            <label for="classification">Primary Classification: </label>
-            <InputSelect id="classification" @bind-Value="_recipe.Classification">
-                <option value="">Select classification ...</option>
-                <option value="Exploration">Exploration</option>
-                <option value="Diplomacy">Diplomacy</option>
-                <option value="Defense">Defense</option>
-            </InputSelect>
-        </p>
-
-        <p>
-            <label for="accommodation">Maximum Accommodation: </label>
-            <InputNumber id="accommodation"
-                         @bind-Value="_recipe.MaximumAccommodation" />
-        </p>
-
-        <p>
-            <label for="valid">Engineering Approval: </label>
-            <InputCheckbox id="valid" @bind-Value="_recipe.IsValidatedDesign" />
-        </p>
-
-        <p>
-            <label for="productionDate">Production Date: </label>
-            <InputDate id="productionDate" @bind-Value="_recipe.ProductionDate" />
-        </p>
-
-    *@
-    <button type="submit">Submit</button>
 </EditForm>
