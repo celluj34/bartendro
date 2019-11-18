@@ -1,25 +1,25 @@
 ﻿@page "/dispensers"
 
-<LoadingScreen Loading="@_loading" />
-
 <h1>Dispensers</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-<button @onclick="Refresh">Refresh Data</button>
+<button @onclick="Refresh" disabled="@_loading" class="btn btn-primary">Refresh Data</button>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Port</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var port in _ports)
-        {
+<LoadingScreen Loading="@_loading">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@port</td>
+                <th>Port</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var port in _ports)
+            {
+                <tr>
+                    <td>@port</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</LoadingScreen>

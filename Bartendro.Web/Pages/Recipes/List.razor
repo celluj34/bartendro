@@ -1,27 +1,28 @@
 ﻿@page "/recipes"
 
-<LoadingScreen Loading="@_loading" />
 
 <h1>Recipes</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-<button @onclick="Refresh">Refresh Data</button>
+<button @onclick="Refresh" disabled="@_loading" class="btn btn-outline-primary mb-2 float-right">Refresh Data</button>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var port in _recipes)
-        {
+<LoadingScreen Loading="@_loading">
+    <table class="table">
+        <thead>
             <tr>
-                <td>@port.Id</td>
-                <td>@port.Title</td>
+                <th>Id</th>
+                <th>Title</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var port in _recipes)
+            {
+                <tr>
+                    <td>@port.Id</td>
+                    <td>@port.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</LoadingScreen>

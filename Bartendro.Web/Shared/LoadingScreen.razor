@@ -1,19 +1,10 @@
 ﻿@if(Loading)
 {
-    <p class="loadingThingy">
+    <div class="alert alert-primary" role="alert">
         <em>Loading...</em>
-    </p>
+    </div>
 }
-
-<style>
-    .loadingThingy {
-        background: rgba(255, 255, 255, 0.5);
-        height: 100%;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-    }
-</style>
+else
+{
+    @ChildContent
+}

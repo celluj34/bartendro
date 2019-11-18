@@ -6,5 +6,8 @@ namespace Bartendro.Web.Shared
     {
         [Parameter]
         public bool Loading {get;set;}
+
+        [Parameter]
+        public RenderFragment ChildContent {get;set;}
     }
 }
