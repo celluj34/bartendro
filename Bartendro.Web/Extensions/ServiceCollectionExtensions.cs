@@ -9,7 +9,7 @@ namespace Bartendro.Web.Extensions
         {
             var namespaces = new[]
             {
-                "Bartendro.Application.Services"
+                "Bartendro.Web.Services"
             };
 
             typeof(ServiceCollectionExtensions).Assembly.GetTypes()
