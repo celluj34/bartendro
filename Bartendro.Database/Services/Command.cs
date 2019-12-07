@@ -15,15 +15,15 @@ namespace Bartendro.Database.Services
     {
         ICommand<T> Run(Action<T> action);
         ICommand<T> Run(Func<T, Task> action);
-        Task<DatabaseResult> SaveChanges();
+        Task<DatabaseResult> SaveChangesAsync();
     }
 
     internal class Command<T> : ICommand<T> where T : Entity, new()
     {
         private const string DocumentConflictError = "This document has already been updated. Refresh and try again.";
-        private readonly List<Func<T, Task>> _actions = new List<Func<T, Task>>();
         private readonly IDatabaseContext _databaseContext;
         private readonly IDateTimeService _dateTimeService;
+        private readonly List<Func<T, Task>> _updateActions = new List<Func<T, Task>>();
         private readonly AbstractValidator<T> _validator;
         private Func<Task<T>> _getAction;
         private Action<T> _saveAction;
@@ -40,7 +40,7 @@ namespace Bartendro.Database.Services
         {
             if(action != null)
             {
-                _actions.Add(x =>
+                _updateActions.Add(x =>
                 {
                     action(x);
 
@@ -55,22 +55,22 @@ namespace Bartendro.Database.Services
         {
             if(action != null)
             {
-                _actions.Add(action);
+                _updateActions.Add(action);
             }
 
             return this;
         }
 
-        public async Task<DatabaseResult> SaveChanges()
+        public async Task<DatabaseResult> SaveChangesAsync()
         {
-            var (entity, result) = await GetEntity();
+            var (entity, result) = await GetEntityAsync();
 
             if(!result.IsValid)
             {
                 return result;
             }
 
-            result = await ApplyActions(entity);
+            result = await ApplyActionsAsync(entity);
 
             if(!result.IsValid)
             {
@@ -84,12 +84,12 @@ namespace Bartendro.Database.Services
                 return result;
             }
 
-            result = await SaveEntity(entity);
+            result = await SaveEntityAsync(entity);
 
             return result;
         }
 
-        private async Task<(T entity, DatabaseResult result)> GetEntity()
+        private async Task<(T entity, DatabaseResult result)> GetEntityAsync()
         {
             var databaseResult = new DatabaseResult();
 
@@ -113,15 +113,15 @@ namespace Bartendro.Database.Services
             }
         }
 
-        private async Task<DatabaseResult> ApplyActions(T entity)
+        private async Task<DatabaseResult> ApplyActionsAsync(T entity)
         {
             var databaseResult = new DatabaseResult();
 
-            foreach(var action in _actions)
+            foreach(var updateAction in _updateActions)
             {
                 try
                 {
-                    await action(entity);
+                    await updateAction(entity);
                 }
                 catch(Exception ex)
                 {
@@ -148,7 +148,7 @@ namespace Bartendro.Database.Services
             }
         }
 
-        private async Task<DatabaseResult> SaveEntity(T entity)
+        private async Task<DatabaseResult> SaveEntityAsync(T entity)
         {
             var databaseResult = new DatabaseResult();
 

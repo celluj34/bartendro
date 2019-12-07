@@ -25,7 +25,7 @@ namespace Bartendro.Web.Pages.Recipes
 
         private async Task HandleValidSubmit()
         {
-            _result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChanges();
+            _result = await CommandFactory.Create<Recipe>().Run(x => x.Title = _recipe.Title).SaveChangesAsync();
         }
     }
 }

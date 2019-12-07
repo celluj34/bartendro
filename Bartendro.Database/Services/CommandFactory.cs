@@ -10,7 +10,7 @@ namespace Bartendro.Database.Services
     {
         ICommand<T> Create<T>() where T : Entity, new();
         ICommand<T> Update<T>(Guid id, byte[] version) where T : Entity, new();
-        Task<ValidationResult> Delete<T>(Guid id, byte[] version) where T : Entity, new();
+        Task<ValidationResult> DeleteAsync<T>(Guid id, byte[] version) where T : Entity, new();
     }
 
     internal class CommandFactory : ICommandFactory
@@ -32,9 +32,9 @@ namespace Bartendro.Database.Services
             return GetCommand<T>().Update(id, version);
         }
 
-        public async Task<ValidationResult> Delete<T>(Guid id, byte[] version) where T : Entity, new()
+        public async Task<ValidationResult> DeleteAsync<T>(Guid id, byte[] version) where T : Entity, new()
         {
-            return await GetCommand<T>().Delete(id, version).SaveChanges();
+            return await GetCommand<T>().Delete(id, version).SaveChangesAsync();
         }
 
         private Command<T> GetCommand<T>() where T : Entity, new()

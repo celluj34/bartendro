@@ -30,7 +30,7 @@ namespace Bartendro.Web.Pages.Recipes
 
         protected async Task HandleValidSubmit()
         {
-            _result = await CommandFactory.Update<Recipe>(_recipe.Id, _recipe.Version).Run(x => x.Title = _recipe.Title).SaveChanges();
+            _result = await CommandFactory.Update<Recipe>(_recipe.Id, _recipe.Version).Run(x => x.Title = _recipe.Title).SaveChangesAsync();
         }
     }
 }

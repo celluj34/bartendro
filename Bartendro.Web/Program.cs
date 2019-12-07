@@ -12,12 +12,12 @@ namespace Bartendro.Web
         {
             var host = CreateHostBuilder(args).Build();
 
-            await MigrateAndSeedDatabase(host);
+            await SetupDatabaseAsync(host);
 
             await host.RunAsync();
         }
 
-        private static async Task MigrateAndSeedDatabase(IHost host)
+        private static async Task SetupDatabaseAsync(IHost host)
         {
             using(var scope = host.Services.CreateScope())
             {
