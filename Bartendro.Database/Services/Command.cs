@@ -185,6 +185,11 @@ namespace Bartendro.Database.Services
             {
                 var entity = await _databaseContext.Set<T>().FindAsync(id);
 
+                if(entity == null)
+                {
+                    throw new InvalidOperationException($"A(n) '{typeof(T).Name}' with id '{id}' was not found.");
+                }
+
                 if(entity.Version != version)
                 {
                     throw new DbUpdateConcurrencyException();
@@ -195,7 +200,12 @@ namespace Bartendro.Database.Services
 
             _validate = true;
 
-            _saveAction = entity => _databaseContext.Set<T>().Update(entity);
+            _saveAction = entity =>
+            {
+                entity.DateModified = _dateTimeService.Now();
+
+                _databaseContext.Set<T>().Update(entity);
+            };
 
             return this;
         }
@@ -205,6 +215,11 @@ namespace Bartendro.Database.Services
             _getAction = async () =>
             {
                 var entity = await _databaseContext.Set<T>().FindAsync(id);
+
+                if(entity == null)
+                {
+                    throw new InvalidOperationException($"A(n) '{typeof(T).Name}' with id '{id}' was not found.");
+                }
 
                 if(entity.Version != version)
                 {
