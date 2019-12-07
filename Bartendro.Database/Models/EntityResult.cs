@@ -4,13 +4,15 @@ namespace Bartendro.Database.Models
 {
     public class EntityResult<T> : ValidationResult
     {
+        private readonly T _entity;
+
         public EntityResult() {}
 
-        public EntityResult(T entityModel)
+        public EntityResult(T entity) : this()
         {
-            EntityModel = entityModel;
+            _entity = entity;
         }
 
-        public T EntityModel {get;}
+        public T Entity => IsValid ? _entity : default;
     }
 }

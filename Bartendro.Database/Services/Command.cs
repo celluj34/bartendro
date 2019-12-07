@@ -91,21 +91,23 @@ namespace Bartendro.Database.Services
 
         private async Task<(T entity, DatabaseResult result)> GetEntity()
         {
+            var databaseResult = new DatabaseResult();
+
             try
             {
                 var entity = await _getAction();
 
-                return (entity, new DatabaseResult());
+                return (entity, databaseResult);
             }
             catch(DbUpdateConcurrencyException)
             {
-                var result = new DatabaseResult().AddError(DocumentConflictError);
+                var result = databaseResult.AddError(DocumentConflictError);
 
                 return (default, result);
             }
             catch(Exception ex)
             {
-                var result = new DatabaseResult().AddError(ex);
+                var result = databaseResult.AddError(ex);
 
                 return (default, result);
             }
@@ -113,19 +115,21 @@ namespace Bartendro.Database.Services
 
         private async Task<DatabaseResult> ApplyActions(T entity)
         {
+            var databaseResult = new DatabaseResult();
+
             foreach(var action in _actions)
             {
                 try
                 {
-                    await action.Invoke(entity);
+                    await action(entity);
                 }
                 catch(Exception ex)
                 {
-                    return new DatabaseResult().AddError(ex);
+                    return databaseResult.AddError(ex);
                 }
             }
 
-            return new DatabaseResult();
+            return databaseResult;
         }
 
         private DatabaseResult ValidateEntity(T entity)
@@ -146,6 +150,8 @@ namespace Bartendro.Database.Services
 
         private async Task<DatabaseResult> SaveEntity(T entity)
         {
+            var databaseResult = new DatabaseResult();
+
             try
             {
                 _saveAction(entity);
@@ -160,11 +166,11 @@ namespace Bartendro.Database.Services
             }
             catch(DbUpdateConcurrencyException)
             {
-                return new DatabaseResult().AddError(DocumentConflictError);
+                return databaseResult.AddError(DocumentConflictError);
             }
             catch(Exception ex)
             {
-                return new DatabaseResult().AddError(ex);
+                return databaseResult.AddError(ex);
             }
         }
 
