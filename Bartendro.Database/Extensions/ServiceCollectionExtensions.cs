@@ -19,7 +19,7 @@ namespace Bartendro.Database.Extensions
             serviceCollection.AddTransient(typeof(Command<>));
             serviceCollection.AddTransient<ICommandFactory, CommandFactory>();
             serviceCollection.AddScoped<IDatabaseContext, DatabaseContext>();
-            serviceCollection.AddScoped<IDatabaseMigrator, DatabaseContext>();
+            serviceCollection.AddScoped<IDatabaseMigrator, DatabaseMigrator>();
             serviceCollection.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
         }
 
