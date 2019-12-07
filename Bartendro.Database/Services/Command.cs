@@ -181,22 +181,7 @@ namespace Bartendro.Database.Services
 
         internal ICommand<T> Update(Guid id, byte[] version)
         {
-            _getAction = async () =>
-            {
-                var entity = await _databaseContext.Set<T>().FindAsync(id);
-
-                if(entity == null)
-                {
-                    throw new InvalidOperationException($"A(n) '{typeof(T).Name}' with id '{id}' was not found.");
-                }
-
-                if(entity.Version != version)
-                {
-                    throw new DbUpdateConcurrencyException();
-                }
-
-                return entity;
-            };
+            _getAction = async () => await _databaseContext.FindByIdAndVersionAsync<T>(id, version);
 
             _validate = true;
 
@@ -212,22 +197,7 @@ namespace Bartendro.Database.Services
 
         internal ICommand<T> Delete(Guid id, byte[] version)
         {
-            _getAction = async () =>
-            {
-                var entity = await _databaseContext.Set<T>().FindAsync(id);
-
-                if(entity == null)
-                {
-                    throw new InvalidOperationException($"A(n) '{typeof(T).Name}' with id '{id}' was not found.");
-                }
-
-                if(entity.Version != version)
-                {
-                    throw new DbUpdateConcurrencyException();
-                }
-
-                return entity;
-            };
+            _getAction = async () => await _databaseContext.FindByIdAndVersionAsync<T>(id, version);
 
             _validate = false;
 
