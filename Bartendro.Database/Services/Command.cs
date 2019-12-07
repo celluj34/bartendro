@@ -6,6 +6,7 @@ using Bartendro.Common.Services;
 using Bartendro.Database.Entities;
 using Bartendro.Database.Models;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bartendro.Database.Services
@@ -20,20 +21,19 @@ namespace Bartendro.Database.Services
     internal class Command<T> : ICommand<T> where T : Entity, new()
     {
         private const string DocumentConflictError = "This document has already been updated. Refresh and try again.";
-        private readonly List<Func<T, Task>> _actions;
+        private readonly List<Func<T, Task>> _actions = new List<Func<T, Task>>();
         private readonly IDatabaseContext _databaseContext;
         private readonly IDateTimeService _dateTimeService;
         private readonly AbstractValidator<T> _validator;
         private Func<Task<T>> _getAction;
         private Action<T> _saveAction;
-        private bool _validate;
+        private Func<T, ValidationResult> _validateAction;
 
         public Command(IDatabaseContext databaseContext, AbstractValidator<T> validator, IDateTimeService dateTimeService)
         {
             _databaseContext = databaseContext;
             _validator = validator;
             _dateTimeService = dateTimeService;
-            _actions = new List<Func<T, Task>>();
         }
 
         public ICommand<T> Run(Action<T> action)
@@ -130,14 +130,18 @@ namespace Bartendro.Database.Services
 
         private DatabaseResult ValidateEntity(T entity)
         {
-            if(!_validate)
+            var databaseResult = new DatabaseResult();
+
+            try
             {
-                return new DatabaseResult();
+                var result = _validateAction(entity);
+
+                return databaseResult.Merge(result);
             }
-
-            var validationResult = _validator.Validate(entity);
-
-            return new DatabaseResult().Merge(validationResult);
+            catch(Exception ex)
+            {
+                return databaseResult.AddError(ex);
+            }
         }
 
         private async Task<DatabaseResult> SaveEntity(T entity)
@@ -168,7 +172,8 @@ namespace Bartendro.Database.Services
         {
             _getAction = () => Task.FromResult(new T());
 
-            _validate = true;
+            _validateAction = entity => _validator.Validate(entity);
+
             _saveAction = entity =>
             {
                 entity.DateCreated = _dateTimeService.Now();
@@ -183,7 +188,7 @@ namespace Bartendro.Database.Services
         {
             _getAction = async () => await _databaseContext.FindByIdAndVersionAsync<T>(id, version);
 
-            _validate = true;
+            _validateAction = entity => _validator.Validate(entity);
 
             _saveAction = entity =>
             {
@@ -199,7 +204,7 @@ namespace Bartendro.Database.Services
         {
             _getAction = async () => await _databaseContext.FindByIdAndVersionAsync<T>(id, version);
 
-            _validate = false;
+            _validateAction = entity => new ValidationResult();
 
             _saveAction = entity =>
             {
