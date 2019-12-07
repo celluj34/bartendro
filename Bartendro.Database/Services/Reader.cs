@@ -20,7 +20,7 @@ namespace Bartendro.Database.Services
 
         public IQueryable<T> Query<T>() where T : Entity
         {
-            return _context.Set<T>().AsNoTracking();
+            return _context.Set<T>().AsNoTracking().Where(x => x.Deleted == false);
         }
     }
 }

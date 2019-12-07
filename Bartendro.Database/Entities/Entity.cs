@@ -11,6 +11,8 @@ namespace Bartendro.Database.Entities
         [Timestamp]
         public byte[] Version {get;set;}
 
+        public bool Deleted {get;set;}
+
         [Required]
         public DateTimeOffset DateCreated {get;set;}
 

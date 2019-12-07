@@ -215,11 +215,13 @@ namespace Bartendro.Database.Services
             };
 
             _validate = false;
+
             _saveAction = entity =>
             {
                 entity.DateModified = _dateTimeService.Now();
+                entity.Deleted = true;
 
-                _databaseContext.Set<T>().Remove(entity);
+                _databaseContext.Set<T>().Update(entity);
             };
 
             return this;
