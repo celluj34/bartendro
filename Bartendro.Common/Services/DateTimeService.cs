@@ -5,15 +5,15 @@ namespace Bartendro.Common.Services
 {
     public interface IDateTimeService
     {
-        DateTime Now();
+        DateTimeOffset Now();
     }
 
     internal class DateTimeService : IDateTimeService
     {
         [ExcludeFromCodeCoverage]
-        public DateTime Now()
+        public DateTimeOffset Now()
         {
-            return DateTime.UtcNow;
+            return DateTimeOffset.UtcNow;
         }
     }
 }
