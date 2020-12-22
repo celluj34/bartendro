@@ -23,22 +23,38 @@ namespace Bartendro.Database.Extensions
             serviceCollection.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
         }
 
-        private static void RegisterValidators(this IServiceCollection serviceCollection)
+        private static IServiceCollection RegisterValidators(this IServiceCollection serviceCollection)
         {
-            const string validatorsNamespace = "Bartendro.Database.Validators";
-            var abstractValidatorType = typeof(AbstractValidator<>);
+            var iValidatorType = typeof(IValidator<>);
+            var dataAnnotationsValidatorType = typeof(DataAnnotationsValidator<>);
+            var validatorsNamespace = dataAnnotationsValidatorType.Namespace;
 
             typeof(ServiceCollectionExtensions).Assembly.GetTypes()
                                                .Where(type => type.Namespace == validatorsNamespace)
                                                .Select(type => new
                                                {
-                                                   BaseClass = type.BaseType,
+                                                   type.BaseType,
                                                    Implementation = type
                                                })
-                                               .Where(type => type.BaseClass.IsGenericType)
-                                               .Where(type => type.BaseClass.GetGenericTypeDefinition() == abstractValidatorType)
+                                               .Where(type => type.BaseType.IsGenericType)
+                                               .Where(type => type.BaseType.GetGenericTypeDefinition() == dataAnnotationsValidatorType)
+                                               .Select(type =>
+                                               {
+                                                   var baseType = type.BaseType.FindInterfaces((x, y) =>
+                                                       x.IsGenericType && x.GetGenericTypeDefinition() == iValidatorType,
+                                                   null)
+                                                   .Single();
+
+                                                   return new
+                                                   {
+                                                       BaseType = baseType,
+                                                       type.Implementation
+                                                   };
+                                               })
                                                .ToList()
-                                               .ForEach(reg => serviceCollection.AddSingleton(reg.BaseClass, reg.Implementation));
+                                               .ForEach(reg => serviceCollection.AddSingleton(reg.BaseType, reg.Implementation));
+
+            return serviceCollection;
         }
     }
 }

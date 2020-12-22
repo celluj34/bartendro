@@ -2,5 +2,5 @@
 
 namespace Bartendro.Database.Validators
 {
-    internal class RecipeValidator : DataAnnotationsValidator<Recipe> {}
+    internal class IngredientValidator : DataAnnotationsValidator<Ingredient> {}
 }
