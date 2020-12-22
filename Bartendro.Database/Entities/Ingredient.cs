@@ -8,10 +8,10 @@ namespace Bartendro.Database.Entities
     {
         [Required]
         [MaxLength(128)]
-        public string Title {get;set;}
+        public string Title { get; set; }
 
         [Required]
         [MaxLength(128)]
-        public string Ounces {get;set;}
+        public string Ounces { get; set; }
     }
 }

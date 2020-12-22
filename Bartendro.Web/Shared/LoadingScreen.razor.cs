@@ -5,9 +5,9 @@ namespace Bartendro.Web.Shared
     public partial class LoadingScreen
     {
         [Parameter]
-        public bool Loading {get;set;}
+        public bool Loading { get; set; }
 
         [Parameter]
-        public RenderFragment ChildContent {get;set;}
+        public RenderFragment ChildContent { get; set; }
     }
 }

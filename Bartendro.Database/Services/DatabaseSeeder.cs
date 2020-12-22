@@ -55,14 +55,14 @@ namespace Bartendro.Database.Services
 
             return new List<Recipe>
             {
-                new Recipe
+                new()
                 {
                     Id = Guid.NewGuid(),
                     Title = "Default Recipe",
                     DateCreated = now,
                     DateModified = now
                 },
-                new Recipe
+                new()
                 {
                     Id = Guid.NewGuid(),
                     Title = "Default Recipe 2",

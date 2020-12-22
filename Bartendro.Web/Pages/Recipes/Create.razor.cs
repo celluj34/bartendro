@@ -18,10 +18,10 @@ namespace Bartendro.Web.Pages.Recipes
         }
 
         [Inject]
-        private ICommandFactory CommandFactory {get;set;}
+        private ICommandFactory CommandFactory { get; set; }
 
         [Inject]
-        private ILocalStorage LocalStorage {get;set;}
+        private ILocalStorage LocalStorage { get; set; }
 
         private async Task HandleValidSubmit()
         {

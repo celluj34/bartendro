@@ -8,16 +8,16 @@ namespace Bartendro.Database.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id {get;set;}
+        public Guid Id { get; set; }
 
         [Timestamp]
-        public byte[] Version {get;set;}
+        public byte[] Version { get; set; }
 
-        public bool Deleted {get;set;}
+        public bool Deleted { get; set; }
 
         [Required]
-        public DateTimeOffset DateCreated {get;set;}
+        public DateTimeOffset DateCreated { get; set; }
 
-        public DateTimeOffset? DateModified {get;set;}
+        public DateTimeOffset? DateModified { get; set; }
     }
 }

@@ -9,21 +9,21 @@ a, .btn-link {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
 }
 
 app {
-    position: relative;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .top-row {
-    height: 3.5rem;
-    display: flex;
     align-items: center;
+    display: flex;
+    height: 3.5rem;
 }
 
 .main {
@@ -45,7 +45,7 @@ app {
 }
 
 .sidebar .top-row {
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .sidebar .navbar-brand {
@@ -53,10 +53,10 @@ app {
 }
 
 .sidebar .oi {
-    width: 2rem;
     font-size: 1.1rem;
-    vertical-align: text-top;
     top: -2px;
+    vertical-align: text-top;
+    width: 2rem;
 }
 
 .nav-item {
@@ -73,21 +73,21 @@ app {
 }
 
 .nav-item a {
-    color: #d7d7d7;
-    border-radius: 4px;
-    height: 3rem;
-    display: flex;
     align-items: center;
+    border-radius: 4px;
+    color: #d7d7d7;
+    display: flex;
+    height: 3rem;
     line-height: 3rem;
 }
 
 .nav-item a.active {
-    background-color: rgba(255,255,255,0.25);
+    background-color: rgba(255, 255, 255, 0.25);
     color: white;
 }
 
 .nav-item a:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
@@ -123,10 +123,10 @@ app {
     }
 
     .sidebar {
-        width: 250px;
         height: 100vh;
         position: sticky;
         top: 0;
+        width: 250px;
     }
 
     .main .top-row {

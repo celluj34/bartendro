@@ -15,13 +15,13 @@ namespace Bartendro.Web.Pages.Recipes
         private DatabaseResult _result;
 
         [Inject]
-        private IReader Reader {get;set;}
+        private IReader Reader { get; set; }
 
         [Inject]
-        private ICommandFactory CommandFactory {get;set;}
+        private ICommandFactory CommandFactory { get; set; }
 
         [Parameter]
-        public Guid Id {get;set;}
+        public Guid Id { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {

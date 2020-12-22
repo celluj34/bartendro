@@ -9,8 +9,8 @@ namespace Bartendro.Database.Entities
     {
         [Required]
         [MaxLength(128)]
-        public string Title {get;set;}
+        public string Title { get; set; }
 
-        public List<Ingredient> Ingredients {get;set;}
+        public List<Ingredient> Ingredients { get; set; }
     }
 }

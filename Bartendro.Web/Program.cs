@@ -20,7 +20,7 @@ namespace Bartendro.Web
         private static async Task SetupDatabaseAsync(IHost host)
         {
             using var scope = host.Services.CreateScope();
-            
+
             var databaseMigrator = scope.ServiceProvider.GetRequiredService<IDatabaseMigrator>();
             await databaseMigrator.MigrateAsync();
 

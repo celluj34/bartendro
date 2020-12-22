@@ -15,12 +15,12 @@ namespace Bartendro.Web.Pages.Recipes
         private IEnumerable<RecipeListModel> _recipes;
 
         [Inject]
-        private IReader Reader {get;set;}
+        private IReader Reader { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             _recipes = await GetAllAsync();
-            
+
             _loading = false;
         }
 
@@ -48,8 +48,8 @@ namespace Bartendro.Web.Pages.Recipes
 
         private class RecipeListModel
         {
-            public Guid Id {get;set;}
-            public string Title {get;set;}
+            public Guid Id { get; set; }
+            public string Title { get; set; }
         }
     }
 }

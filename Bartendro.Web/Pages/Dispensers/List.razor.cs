@@ -10,7 +10,7 @@ namespace Bartendro.Web.Pages.Dispensers
         private IEnumerable<string> _ports;
 
         [Inject]
-        private ISerialPortService DispensersOrchestrator {get;set;}
+        private ISerialPortService DispensersOrchestrator { get; set; }
 
         protected override void OnInitialized()
         {
