@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bartendro.Database.Entities
 {
     public abstract class Entity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id {get;set;}
 
         [Timestamp]
@@ -16,7 +18,6 @@ namespace Bartendro.Database.Entities
         [Required]
         public DateTimeOffset DateCreated {get;set;}
 
-        [Required]
-        public DateTimeOffset DateModified {get;set;}
+        public DateTimeOffset? DateModified {get;set;}
     }
 }
