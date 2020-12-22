@@ -19,14 +19,13 @@ namespace Bartendro.Web
 
         private static async Task SetupDatabaseAsync(IHost host)
         {
-            using(var scope = host.Services.CreateScope())
-            {
-                var databaseMigrator = scope.ServiceProvider.GetRequiredService<IDatabaseMigrator>();
-                await databaseMigrator.MigrateAsync();
+            using var scope = host.Services.CreateScope();
+            
+            var databaseMigrator = scope.ServiceProvider.GetRequiredService<IDatabaseMigrator>();
+            await databaseMigrator.MigrateAsync();
 
-                var databaseSeeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
-                await databaseSeeder.SeedAsync();
-            }
+            var databaseSeeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+            await databaseSeeder.SeedAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args)
