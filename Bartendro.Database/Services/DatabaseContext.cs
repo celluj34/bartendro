@@ -15,8 +15,8 @@ namespace Bartendro.Database.Services
 
     internal class DatabaseContext : DbContext, IDatabaseContext
     {
-        public DbSet<Recipe> Recipes {get;set;}
-        public DbSet<Ingredient> Ingredients {get;set;}
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
 
         DbSet<T> IDatabaseContext.Set<T>()
         {

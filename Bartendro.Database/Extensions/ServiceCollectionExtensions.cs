@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Bartendro.Database.Commands;
 using Bartendro.Database.Services;
+using Bartendro.Database.Validators;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,14 +15,16 @@ namespace Bartendro.Database.Extensions
             serviceCollection.RegisterValidators();
         }
 
-        private static void RegisterServices(this IServiceCollection serviceCollection)
+        private static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<IReader, Reader>();
-            serviceCollection.AddTransient(typeof(Command<>));
-            serviceCollection.AddTransient<ICommandFactory, CommandFactory>();
-            serviceCollection.AddScoped<IDatabaseContext, DatabaseContext>();
-            serviceCollection.AddScoped<IDatabaseMigrator, DatabaseMigrator>();
-            serviceCollection.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+            return serviceCollection.AddTransient<IReader, Reader>()
+                                    .AddTransient(typeof(CreateCommand<>))
+                                    .AddTransient(typeof(UpdateCommand<>))
+                                    .AddTransient(typeof(DeleteCommand<>))
+                                    .AddTransient<ICommandFactory, CommandFactory>()
+                                    .AddScoped<IDatabaseContext, DatabaseContext>()
+                                    .AddScoped<IDatabaseMigrator, DatabaseMigrator>()
+                                    .AddScoped<IDatabaseSeeder, DatabaseSeeder>();
         }
 
         private static IServiceCollection RegisterValidators(this IServiceCollection serviceCollection)

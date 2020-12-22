@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Bartendro.Database.Commands;
 using Bartendro.Database.Entities;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,22 +25,25 @@ namespace Bartendro.Database.Services
 
         public ICommand<T> Create<T>() where T : Entity, new()
         {
-            return GetCommand<T>().Create();
+            var command = _serviceProvider.GetRequiredService<CreateCommand<T>>();
+
+            return command;
         }
 
         public ICommand<T> Update<T>(Guid id, byte[] version) where T : Entity, new()
         {
-            return GetCommand<T>().Update(id, version);
+            var command = _serviceProvider.GetRequiredService<UpdateCommand<T>>();
+            command.Initialize(id, version);
+
+            return command;
         }
 
         public async Task<ValidationResult> DeleteAsync<T>(Guid id, byte[] version) where T : Entity, new()
         {
-            return await GetCommand<T>().Delete(id, version).SaveChangesAsync();
-        }
+            var command = _serviceProvider.GetRequiredService<DeleteCommand<T>>();
+            command.Initialize(id, version);
 
-        private Command<T> GetCommand<T>() where T : Entity, new()
-        {
-            return _serviceProvider.GetRequiredService<Command<T>>();
+            return await command.SaveChangesAsync();
         }
     }
 }
