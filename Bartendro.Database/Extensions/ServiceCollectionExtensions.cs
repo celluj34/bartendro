@@ -9,10 +9,9 @@ namespace Bartendro.Database.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterDatabase(this IServiceCollection serviceCollection)
+        public static IServiceCollection RegisterDatabase(this IServiceCollection serviceCollection)
         {
-            serviceCollection.RegisterServices();
-            serviceCollection.RegisterValidators();
+            return serviceCollection.RegisterServices().RegisterValidators();
         }
 
         private static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)

@@ -5,7 +5,7 @@ namespace Bartendro.Web.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
         {
             var namespaces = new[]
             {
@@ -24,6 +24,8 @@ namespace Bartendro.Web.Extensions
                                                })
                                                .ToList()
                                                .ForEach(reg => serviceCollection.AddTransient(reg.Interface, reg.Implementation));
+
+            return serviceCollection;
         }
     }
 }

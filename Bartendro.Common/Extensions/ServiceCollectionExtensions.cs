@@ -13,7 +13,7 @@ namespace Bartendro.Common.Extensions
 
         public static IServiceCollection ConfigureSettings<T>(this IServiceCollection serviceCollection, IConfiguration configuration) where T : class
         {
-            return serviceCollection.Configure<T>(options => configuration.GetSection(typeof(T).Name).Bind(options));
+            return serviceCollection.Configure<T>(configuration.GetSection(typeof(T).Name));
         }
     }
 }

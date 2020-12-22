@@ -16,11 +16,11 @@ namespace Bartendro.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddStorage();
-            services.AddFormValidation(config => config.AddDataAnnotationsValidation().AddFluentValidation(typeof(ServiceCollectionExtensions).Assembly));
-            services.RegisterServices();
-            services.RegisterDatabase();
-            services.RegisterCommon();
+            services.AddStorage()
+                    .AddFormValidation(config => config.AddDataAnnotationsValidation().AddFluentValidation(typeof(ServiceCollectionExtensions).Assembly))
+                    .RegisterServices()
+                    .RegisterDatabase()
+                    .RegisterCommon();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
