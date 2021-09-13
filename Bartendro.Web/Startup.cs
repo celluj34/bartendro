@@ -5,8 +5,6 @@ using Blazor.Extensions.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PeterLeslieMorris.Blazor.Validation;
-using ServiceCollectionExtensions = Bartendro.Database.Extensions.ServiceCollectionExtensions;
 
 namespace Bartendro.Web
 {
@@ -16,16 +14,12 @@ namespace Bartendro.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddStorage()
-                    .AddFormValidation(config => config.AddDataAnnotationsValidation().AddFluentValidation(typeof(ServiceCollectionExtensions).Assembly))
-                    .RegisterServices()
-                    .RegisterDatabase()
-                    .RegisterCommon();
+            services.AddStorage().RegisterServices().RegisterDatabase().RegisterCommon();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
