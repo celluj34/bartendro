@@ -1,11 +1,18 @@
-﻿using System.Linq;
+using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace Bartendro.Web.Extensions
+namespace BlazorApp2.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddServices(this IServiceCollection services, ConfigurationManager configuration, IHostEnvironment hostEnvironment)
+        {
+            return services.AddServices();
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services)
         {
             var namespaces = new[]
             {
@@ -23,9 +30,9 @@ namespace Bartendro.Web.Extensions
                                                    Implementation = type
                                                })
                                                .ToList()
-                                               .ForEach(reg => serviceCollection.AddTransient(reg.Interface, reg.Implementation));
+                                               .ForEach(reg => services.AddTransient(reg.Interface, reg.Implementation));
 
-            return serviceCollection;
+            return services;
         }
     }
 }

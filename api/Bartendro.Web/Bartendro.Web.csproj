@@ -1,10 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <ItemGroup>
-    <PackageReference Include="Blazor.Extensions.Storage" />
-    <PackageReference Include="Blazored.FluentValidation" />
-    <PackageReference Include="System.IO.Ports" />
-  </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
     <ProjectReference Include="..\Bartendro.Application\Bartendro.Application.csproj" />

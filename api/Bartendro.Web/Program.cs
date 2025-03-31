@@ -1,23 +1,65 @@
 using System.Threading.Tasks;
 using Bartendro.Data.Services;
-using Microsoft.AspNetCore.Hosting;
+using BlazorApp2.Components;
+using BlazorApp2.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Bartendro.Web
+namespace BlazorApp2
 {
     public class Program
     {
         public static async Task Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            var builder = WebApplication.CreateBuilder(args);
 
-            await SetupDatabaseAsync(host);
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Configuration.AddUserSecrets<Program>();
+            }
 
-            await host.RunAsync();
+            ConfigureServices(builder.Services, builder.Configuration, builder.Environment);
+
+            var app = builder.Build();
+
+            ConfigureApp(app, builder.Environment);
+
+            
+            await SetupDatabaseAsync(app);
+
+            await app.RunAsync();
         }
 
-        private static async Task SetupDatabaseAsync(IHost host)
+        private static void ConfigureServices(IServiceCollection services, ConfigurationManager configuration, IHostEnvironment hostEnvironment)
+        {
+            // Add services to the container.
+            services.AddRazorComponents().AddInteractiveServerComponents();
+
+            services.AddServices(configuration, hostEnvironment);
+        }
+
+        private static void ConfigureApp(WebApplication app, IHostEnvironment hostEnvironment)
+        {
+            // Configure the HTTP request pipeline.
+            if (!hostEnvironment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAntiforgery();
+
+            app.MapStaticAssets();
+            app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+        }
+
+        private static async Task SetupDatabaseAsync(WebApplication host)
         {
             using var scope = host.Services.CreateScope();
 
@@ -26,15 +68,6 @@ namespace Bartendro.Web
 
             var databaseSeeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
             await databaseSeeder.SeedAsync();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            return Host.CreateDefaultBuilder(args)
-                       .ConfigureWebHostDefaults(webHostBuilder =>
-                       {
-                           webHostBuilder.UseStartup<Startup>();
-                       });
         }
     }
 }
