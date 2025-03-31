@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Bartendro.Database.Services;
+using Bartendro.Data.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

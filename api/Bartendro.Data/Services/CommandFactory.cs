@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Bartendro.Database.Commands;
-using Bartendro.Database.Entities;
+using Bartendro.Data.Commands;
+using Bartendro.Data.Entities;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bartendro.Database.Services
+namespace Bartendro.Data.Services
 {
     public interface ICommandFactory
     {

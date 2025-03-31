@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bartendro.Common.Extensions;
-using Bartendro.Database.Entities;
-using Bartendro.Database.Models;
-using Bartendro.Database.Services;
+using Bartendro.Data.Entities;
+using Bartendro.Data.Models;
+using Bartendro.Data.Services;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bartendro.Database.Commands
+namespace Bartendro.Data.Commands
 {
     public interface ICommand<out T> where T : Entity, new()
     {

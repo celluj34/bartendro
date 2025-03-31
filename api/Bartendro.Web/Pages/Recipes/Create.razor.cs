@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Bartendro.Database.Entities;
-using Bartendro.Database.Models;
-using Bartendro.Database.Services;
+using Bartendro.Data.Entities;
+using Bartendro.Data.Models;
+using Bartendro.Data.Services;
 using Blazor.Extensions.Storage.Interfaces;
 using Microsoft.AspNetCore.Components;
 

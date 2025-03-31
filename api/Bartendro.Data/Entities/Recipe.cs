@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Bartendro.Database.Entities
+namespace Bartendro.Data.Entities
 {
     [Table("Recipes")]
     public class Recipe : Entity

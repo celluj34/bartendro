@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bartendro.Common.Services;
-using Bartendro.Database.Entities;
+using Bartendro.Data.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace Bartendro.Database.Services
+namespace Bartendro.Data.Services
 {
     public interface IDatabaseSeeder
     {

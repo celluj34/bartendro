@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Bartendro.Database.Entities;
+using Bartendro.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bartendro.Database.Services
+namespace Bartendro.Data.Services
 {
     internal interface IDatabaseContext
     {

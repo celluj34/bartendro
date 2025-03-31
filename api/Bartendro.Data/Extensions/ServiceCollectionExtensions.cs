@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Bartendro.Database.Commands;
-using Bartendro.Database.Services;
-using Bartendro.Database.Validators;
+using Bartendro.Data.Commands;
+using Bartendro.Data.Services;
+using Bartendro.Data.Validators;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bartendro.Database.Extensions
+namespace Bartendro.Data.Extensions
 {
     public static class ServiceCollectionExtensions
     {

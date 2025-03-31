@@ -7,7 +7,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
-namespace Bartendro.Database.Validators
+namespace Bartendro.Data.Validators
 {
     /// <summary>
     ///     Wrapper around FluentValidation.AbstractValidator to run DataAnnotations validations in addition to regular

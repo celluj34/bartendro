@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bartendro.Database.Models
+namespace Bartendro.Data.Models
 {
     public class EntityModel
     {

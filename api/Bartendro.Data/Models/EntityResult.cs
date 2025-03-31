@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Bartendro.Database.Models
+namespace Bartendro.Data.Models
 {
     public class EntityResult<T> : ValidationResult
     {

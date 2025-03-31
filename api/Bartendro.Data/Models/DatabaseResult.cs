@@ -1,4 +1,4 @@
-﻿namespace Bartendro.Database.Models
+﻿namespace Bartendro.Data.Models
 {
     public class DatabaseResult : EntityResult<EntityModel>
     {

@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Bartendro.Common.Services;
-using Bartendro.Database.Entities;
-using Bartendro.Database.Services;
+using Bartendro.Data.Entities;
+using Bartendro.Data.Services;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace Bartendro.Database.Commands
+namespace Bartendro.Data.Commands
 {
     internal class CreateCommand<T> : Command<T> where T : Entity, new()
     {

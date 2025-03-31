@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Bartendro.Database.Entities;
+using Bartendro.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bartendro.Database.Services
+namespace Bartendro.Data.Services
 {
     public interface IReader
     {

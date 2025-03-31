@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Bartendro.Common.Services;
-using Bartendro.Database.Entities;
-using Bartendro.Database.Services;
-using FluentValidation;
+using Bartendro.Data.Entities;
+using Bartendro.Data.Services;
 using FluentValidation.Results;
 
-namespace Bartendro.Database.Commands
+namespace Bartendro.Data.Commands
 {
-    internal class UpdateCommand<T> : Command<T> where T : Entity, new()
+    internal class DeleteCommand<T> : Command<T> where T : Entity, new()
     {
         private readonly IDateTimeService _dateTimeService;
-        private readonly IValidator<T> _validator;
         private Guid _id;
         private byte[] _version;
 
-        public UpdateCommand(IDatabaseContext databaseContext, IValidator<T> validator, IDateTimeService dateTimeService) : base(databaseContext)
+        public DeleteCommand(IDatabaseContext databaseContext, IDateTimeService dateTimeService) : base(databaseContext)
         {
-            _validator = validator;
             _dateTimeService = dateTimeService;
         }
 
@@ -28,12 +25,13 @@ namespace Bartendro.Database.Commands
 
         protected override Task<ValidationResult> Validate(T entity)
         {
-            return _validator.ValidateAsync(entity);
+            return Task.FromResult(new ValidationResult());
         }
 
         protected override Task Save(IDatabaseContext databaseContext, T entity)
         {
             entity.DateModified = _dateTimeService.Now();
+            entity.Deleted = true;
 
             databaseContext.Set<T>().Update(entity);
 

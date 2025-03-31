@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Bartendro.Database.Entities;
-using Bartendro.Database.Models;
-using Bartendro.Database.Services;
+using Bartendro.Data.Entities;
+using Bartendro.Data.Models;
+using Bartendro.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
-﻿using Bartendro.Database.Entities;
+﻿using Bartendro.Data.Entities;
 
-namespace Bartendro.Database.Validators
+namespace Bartendro.Data.Validators
 {
     internal class IngredientValidator : DataAnnotationsValidator<Ingredient> {}
 }
