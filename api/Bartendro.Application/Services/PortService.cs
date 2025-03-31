@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Logging;
 
-namespace Bartendro.Web.Services
+namespace Bartendro.Application.Services
 {
     public class RouterDriver
     {
@@ -578,10 +578,7 @@ namespace Bartendro.Web.Services
 
         public void SetStatusColor(int red, int green, int blue)
         {
-            if (_softwareOnly)
-            {
-                return;
-            }
+            if (_softwareOnly) {}
 
             // Assuming status is an instance of StatusLED
             // status.SetColor(red, green, blue);
@@ -648,10 +645,7 @@ namespace Bartendro.Web.Services
 
         private void Sync(int state)
         {
-            if (_softwareOnly)
-            {
-                return;
-            }
+            if (_softwareOnly) {}
 
             // Assuming dispenserSelect is an instance of DispenserSelect
             // dispenserSelect.Sync(state);
@@ -848,7 +842,7 @@ namespace Bartendro.Web.Services
 
                 ack = PACKET_ACK_TIMEOUT;
             }
-            
+
             var packet = Array.Empty<byte>();
 
             if (ack == PACKET_ACK_OK)

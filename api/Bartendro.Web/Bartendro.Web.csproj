@@ -7,7 +7,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bartendro.Database\Bartendro.Database.csproj" />
+    <ProjectReference Include="..\Bartendro.Application\Bartendro.Application.csproj" />
   </ItemGroup>
 
 </Project>

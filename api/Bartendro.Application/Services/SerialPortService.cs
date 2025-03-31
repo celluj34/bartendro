@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO.Ports;
 
-namespace Bartendro.Web.Services
+namespace Bartendro.Application.Services
 {
-    internal interface ISerialPortService
+    public interface ISerialPortService
     {
         IEnumerable<string> GetPorts();
     }

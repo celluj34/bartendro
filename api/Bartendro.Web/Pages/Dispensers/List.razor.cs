@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Bartendro.Web.Services;
+using System.Collections.Generic;
+using Bartendro.Application.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace Bartendro.Web.Pages.Dispensers
