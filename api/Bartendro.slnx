@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Bartendro.Application/Bartendro.Application.csproj" />
+  <Project Path="Bartendro.Common/Bartendro.Common.csproj" />
+  <Project Path="Bartendro.Data/Bartendro.Data.csproj" />
+  <Project Path="Bartendro.Web/Bartendro.Web.csproj" />
+</Solution>
