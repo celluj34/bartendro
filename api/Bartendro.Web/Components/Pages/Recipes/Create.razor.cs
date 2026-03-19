@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Bartendro.Data.Entities;
 using Bartendro.Data.Models;
 using Bartendro.Data.Services;
-using Blazor.Extensions.Storage.Interfaces;
 using Microsoft.AspNetCore.Components;
 
-namespace Bartendro.Web.Pages.Recipes
+namespace Bartendro.Web.Components.Pages.Recipes
 {
     public partial class Create
     {

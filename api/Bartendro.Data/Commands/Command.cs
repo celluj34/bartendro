@@ -30,7 +30,7 @@ namespace Bartendro.Data.Commands
 
         public ICommand<T> Run(Action<T> action)
         {
-            if(action != null)
+            if (action != null)
             {
                 _updateActions.Add(x =>
                 {
@@ -45,7 +45,7 @@ namespace Bartendro.Data.Commands
 
         public ICommand<T> Run(Func<T, Task> action)
         {
-            if(action != null)
+            if (action != null)
             {
                 _updateActions.Add(action);
             }
@@ -56,25 +56,25 @@ namespace Bartendro.Data.Commands
         public async Task<DatabaseResult> SaveChangesAsync()
         {
             var (entity, result) = await GetEntityAsync();
-            if(!result.IsValid)
+            if (!result.IsValid)
             {
                 return new DatabaseResult().Merge(result);
             }
 
             result = await ApplyActionsAsync(entity);
-            if(!result.IsValid)
+            if (!result.IsValid)
             {
                 return new DatabaseResult().Merge(result);
             }
 
             result = await ValidateEntity(entity);
-            if(!result.IsValid)
+            if (!result.IsValid)
             {
                 return new DatabaseResult().Merge(result);
             }
 
             result = await SaveEntityAsync(entity);
-            if(!result.IsValid)
+            if (!result.IsValid)
             {
                 return new DatabaseResult().Merge(result);
             }
@@ -98,11 +98,11 @@ namespace Bartendro.Data.Commands
 
                 return (entity, new DatabaseResult());
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
                 return (default, new DatabaseResult().AddError(DocumentConflictError));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return (default, new DatabaseResult().AddError(ex));
             }
@@ -110,13 +110,13 @@ namespace Bartendro.Data.Commands
 
         private async Task<DatabaseResult> ApplyActionsAsync(T entity)
         {
-            foreach(var updateAction in _updateActions)
+            foreach (var updateAction in _updateActions)
             {
                 try
                 {
                     await updateAction(entity);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return new DatabaseResult().AddError(ex);
                 }
@@ -133,7 +133,7 @@ namespace Bartendro.Data.Commands
 
                 return new DatabaseResult().Merge(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new DatabaseResult().AddError(ex);
             }
@@ -153,11 +153,11 @@ namespace Bartendro.Data.Commands
                     Version = entity.Version
                 });
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
                 return new DatabaseResult().AddError(DocumentConflictError);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new DatabaseResult().AddError(ex);
             }

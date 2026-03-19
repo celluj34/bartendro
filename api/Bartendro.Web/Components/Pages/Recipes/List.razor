@@ -8,21 +8,21 @@
 <button @onclick="Refresh" disabled="@_loading" class="btn btn-outline-primary mb-2 float-right">Refresh Data</button>
 
 <LoadingScreen Loading="@_loading">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var port in _recipes)
-            {
-                <tr>
-                    <td>@port.Id</td>
-                    <td>@port.Title</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var port in _recipes)
+    {
+      <tr>
+        <td>@port.Id</td>
+        <td>@port.Title</td>
+      </tr>
+    }
+    </tbody>
+  </table>
 </LoadingScreen>

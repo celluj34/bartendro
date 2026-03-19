@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace Bartendro.Common.Extensions
 {
     public static class ExceptionExtensions
     {
-        public static string GetFullMessage(this Exception exception)
+        public static string GetFullMessage(this Exception? exception)
         {
             var stringBuilder = new StringBuilder();
 
-            while(exception != null)
+            while (exception != null)
             {
                 stringBuilder.AppendLine(exception.Message);
 

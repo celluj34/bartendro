@@ -7,19 +7,19 @@
 <button @onclick="Refresh" disabled="@_loading" class="btn btn-primary">Refresh Data</button>
 
 <LoadingScreen Loading="@_loading">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Port</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var port in _ports)
-            {
-                <tr>
-                    <td>@port</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Port</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var port in _ports)
+    {
+      <tr>
+        <td>@port</td>
+      </tr>
+    }
+    </tbody>
+  </table>
 </LoadingScreen>

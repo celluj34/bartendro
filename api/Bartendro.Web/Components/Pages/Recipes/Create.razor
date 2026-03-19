@@ -5,11 +5,11 @@
 <p>This component demonstrates sending data to a service.</p>
 
 <EditForm Model="@_recipe" OnValidSubmit="@HandleValidSubmit">
-    <FluentValidationValidator />
+  <FluentValidationValidator/>
 
-    <p>
-        <label for="Title">Title: </label>
-        <InputText id="Title" @bind-Value="_recipe.Title" class="form-control" />
-        <ValidationMessage For="@(() => _recipe.Title)" />
-    </p>
+  <p>
+    <label for="Title">Title: </label>
+    <InputText id="Title" @bind-Value="_recipe.Title" class="form-control"/>
+    <ValidationMessage For="@(() => _recipe.Title)"/>
+  </p>
 </EditForm>

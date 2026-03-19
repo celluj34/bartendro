@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BlazorApp2.Extensions
+namespace Bartendro.Web.Extensions
 {
     public static class ServiceCollectionExtensions
     {

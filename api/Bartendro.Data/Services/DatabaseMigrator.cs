@@ -26,7 +26,7 @@ namespace Bartendro.Data.Services
             {
                 await _databaseContext.MigrateAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred migrating the database.");
 

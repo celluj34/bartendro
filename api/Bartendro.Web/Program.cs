@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 using Bartendro.Data.Services;
-using BlazorApp2.Components;
-using BlazorApp2.Extensions;
+using Bartendro.Web.Components;
+using Bartendro.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BlazorApp2
+namespace Bartendro.Web
 {
     public class Program
     {
@@ -26,7 +26,6 @@ namespace BlazorApp2
 
             ConfigureApp(app, builder.Environment);
 
-            
             await SetupDatabaseAsync(app);
 
             await app.RunAsync();

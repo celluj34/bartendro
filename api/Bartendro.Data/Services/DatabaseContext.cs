@@ -37,12 +37,12 @@ namespace Bartendro.Data.Services
         {
             var entity = await Set<T>().FindAsync(id);
 
-            if(entity == null)
+            if (entity == null)
             {
                 throw new InvalidOperationException($"A(n) '{typeof(T).Name}' with id '{id}' was not found.");
             }
 
-            if(entity.Version != version)
+            if (entity.Version != version)
             {
                 throw new DbUpdateConcurrencyException();
             }

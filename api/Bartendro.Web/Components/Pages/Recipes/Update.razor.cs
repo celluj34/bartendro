@@ -7,7 +7,7 @@ using Bartendro.Data.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bartendro.Web.Pages.Recipes
+namespace Bartendro.Web.Components.Pages.Recipes
 {
     public partial class Update
     {

@@ -20,7 +20,7 @@ namespace Bartendro.Data.Validators
             var result = new ValidationResult();
 
             var dataAnnotationFailures = GetDataAnnotationsValidationFailures(context);
-            foreach(var failure in dataAnnotationFailures)
+            foreach (var failure in dataAnnotationFailures)
             {
                 result.Errors.Add(failure);
             }

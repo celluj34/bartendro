@@ -32,7 +32,7 @@ namespace Bartendro.Data.Services
             {
                 var recipes = _context.Set<Recipe>();
 
-                if(recipes.Any())
+                if (recipes.Any())
                 {
                     return;
                 }
@@ -41,7 +41,7 @@ namespace Bartendro.Data.Services
 
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred seeding the database.");
 

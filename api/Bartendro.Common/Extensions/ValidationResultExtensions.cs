@@ -23,7 +23,7 @@ namespace Bartendro.Common.Extensions
 
         public static ValidationResult AddError(this ValidationResult result, string propertyName, string errorMessage)
         {
-            if(result == null)
+            if (result == null)
             {
                 throw new ArgumentNullException(nameof(result));
             }
@@ -35,17 +35,17 @@ namespace Bartendro.Common.Extensions
 
         public static ValidationResult Merge(this ValidationResult result, ValidationResult otherResult)
         {
-            if(result == null)
+            if (result == null)
             {
                 throw new ArgumentNullException(nameof(result));
             }
 
-            if(otherResult == null || otherResult.IsValid)
+            if (otherResult == null || otherResult.IsValid)
             {
                 return result;
             }
 
-            foreach(var error in otherResult.Errors)
+            foreach (var error in otherResult.Errors)
             {
                 result.Errors.Add(error);
             }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Bartendro.Application.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace Bartendro.Web.Pages.Dispensers
+namespace Bartendro.Web.Components.Pages.Dispensers
 {
     public partial class List
     {
